@@ -1,10 +1,9 @@
 import { io } from 'socket.io-client';
-
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || 'http://localhost:9092';
 class SocketService {
   socket = null;
   listeners = new Map();
 
-const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || 'http://localhost:9092';
   connect() {
     return new Promise((resolve, reject) => {
       this.socket = io('BACKEND_URL', {
