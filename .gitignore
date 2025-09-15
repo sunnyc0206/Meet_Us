@@ -23,7 +23,6 @@ npm-debug.log*
 /dist
 /build
 /out
-/public
 
 # Generated files
 # ========================
