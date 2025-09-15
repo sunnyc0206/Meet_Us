@@ -1,19 +1,46 @@
 {
-  "name": "zoom-clone",
+  "name": "meetus-frontend",
   "version": "1.0.0",
-  "description": "zoom-clone",
-  "main": "index.js",
-  "scripts": {
-    "start": "node server.js"
-  },
-  "keywords": [],
-  "author": "Sunny",
-  "license": "ISC",
+  "private": true,
   "dependencies": {
-    "ejs": "^3.1.6",
-    "express": "^4.17.1",
-    "peer": "^0.6.1",
-    "socket.io": "^4.1.3",
-    "uuid": "^8.3.2"
-  }
+    "@types/node": "^20.10.5",
+    "@types/react": "^18.2.45",
+    "@types/react-dom": "^18.2.18",
+    "axios": "^1.6.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-hot-toast": "^2.6.0",
+    "socket.io-client": "^4.6.1",
+    "typescript": "^4.9.5",
+    "web-vitals": "^3.5.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@types/socket.io-client": "^3.0.0",
+    "ajv": "^8.17.1",
+    "react-scripts": "5.0.1"
+  },
+  "proxy": "http://localhost:8080"
 }
