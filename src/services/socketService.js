@@ -6,7 +6,7 @@ class SocketService {
 
   connect() {
     return new Promise((resolve, reject) => {
-      this.socket = io('BACKEND_URL', {
+      this.socket = io(BACKEND_URL, {
         transports: ['websocket', 'polling'],
         reconnection: true,
         reconnectionAttempts: 5,
