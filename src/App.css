@@ -573,6 +573,7 @@ body {
   border-top: 1px solid #e5e7eb;
   gap: 10px;
   align-items: center;
+  
 }
 
 .message-input input[type="text"] {
@@ -585,6 +586,19 @@ body {
   background: #f9fafb;
   transition: all 0.3s;
 }
+ 
+.message-input .file-preview {
+  flex: 1;
+  padding: 12px 20px;
+  border: 1px solid #e5e7eb;
+  border-radius: 25px;
+  outline: none;
+  font-size: 15px;
+  background: #f9fafb;
+  transition: all 0.3s;
+}
+
+
 
 .message-input input[type="text"]:focus {
   border-color: #667eea;
