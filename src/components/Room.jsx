@@ -74,8 +74,6 @@ const Room = ({ roomId, username, users, onLeaveRoom, showToast }) => {
                 try {
                     channel.send(e.target.result);
                     offset += e.target.result.byteLength;
-
-                    // NEW: Update progress in the shared message object
                     setMessages(prev => prev.map(m => {
                         if (m.id === messageId) {
                             const newSentSizeMap = { ...(m.sentSizeMap || {}), [targetUserId]: offset };
@@ -87,7 +85,6 @@ const Room = ({ roomId, username, users, onLeaveRoom, showToast }) => {
                     if (offset < file.size) {
                         readSlice();
                     } else {
-                        // NEW: Update completion status in the shared message object
                         setMessages(prev => prev.map(m => {
                             if (m.id === messageId) {
                                 const newStatusMap = { ...m.statusMap, [targetUserId]: 'completed' };
@@ -117,7 +114,7 @@ const Room = ({ roomId, username, users, onLeaveRoom, showToast }) => {
         };
         readSlice();
     }, []);
-    
+
     const setupDataChannel = useCallback((channel, userId) => {
         channel.binaryType = 'arraybuffer';
         channel.onopen = () => {
@@ -194,7 +191,7 @@ const Room = ({ roomId, username, users, onLeaveRoom, showToast }) => {
             await pc.addIceCandidate(new RTCIceCandidate(data.candidate));
         }
     }, []);
-    
+
     const acceptFile = useCallback((fileMessage) => {
         socketService.emit('file-accepted', { to: fileMessage.from });
         const transferMessage = {
@@ -267,7 +264,7 @@ const Room = ({ roomId, username, users, onLeaveRoom, showToast }) => {
                     }
                     return msg;
                 }));
-                
+
                 const channel = dataChannels.current.get(data.from);
                 if (channel && channel.readyState === 'open') {
                     sendFileData(pendingFile.targetId, pendingFile.file, pendingFile.messageId);
@@ -325,52 +322,60 @@ const Room = ({ roomId, username, users, onLeaveRoom, showToast }) => {
         };
     }, []);
 
-    // NEW: Handles an array of target user IDs
+// sendFile function
     const sendFile = useCallback(async (targetUserIds, file) => {
-        if (!file || targetUserIds.length === 0) return;
+    if (!file || targetUserIds.length === 0) return;
 
-        const sharedMessageId = `${socketService.getSocketId()}_${file.name}_${Date.now()}`;
-        const statusMap = targetUserIds.reduce((acc, id) => ({ ...acc, [id]: 'pending' }), {});
-        
-        // NEW: Create one message object for the sender's UI
-        setMessages(prev => [...prev, {
-            id: sharedMessageId,
-            type: 'file-transfer', isOwn: true,
-            recipients: targetUserIds.map(id => ({ id, username: users.find(u => u.id === id)?.username || 'User' })),
-            statusMap,
-            sentSizeMap: {},
-            fileName: file.name, fileSize: file.size, status: 'pending',
-            timestamp: Date.now(),
-        }]);
+    const sharedMessageId = `${socketService.getSocketId()}_${file.name}_${Date.now()}`;
+    const statusMap = targetUserIds.reduce((acc, id) => ({ ...acc, [id]: 'pending' }), {});
 
-        // NEW: Loop to establish connection and send metadata to each user
-        for (const targetUserId of targetUserIds) {
-            pendingFileData.current.set(targetUserId, {
-                file,
-                targetId: targetUserId,
-                messageId: sharedMessageId, // Link back to the single message
-                isAccepted: false
-            });
+    setMessages(prev => [...prev, {
+        id: sharedMessageId,
+        type: 'file-transfer', isOwn: true,
+        recipients: targetUserIds.map(id => ({ id, username: users.find(u => u.id === id)?.username || 'User' })),
+        statusMap,
+        sentSizeMap: {},
+        fileName: file.name, fileSize: file.size, status: 'pending',
+        timestamp: Date.now(),
+    }]);
 
+    for (const targetUserId of targetUserIds) {
+        pendingFileData.current.set(targetUserId, {
+            file,
+            targetId: targetUserId,
+            messageId: sharedMessageId,
+            isAccepted: false
+        });
+
+        const existingPC = peerConnections.current.get(targetUserId);
+        const existingChannel = dataChannels.current.get(targetUserId);
+
+        // Check if an existing, open data channel exists
+        if (existingChannel && existingChannel.readyState === 'open') {
+            console.log(`Re-using existing data channel for file transfer to ${targetUserId}.`);
+            // Directly send file metadata and wait for acceptance
+            socketService.sendFileMetadata(targetUserId, file.name, file.size, file.type);
+        } else {
+            console.log(`Creating new peer connection and data channel for ${targetUserId}.`);
             const pc = createPeerConnection(targetUserId, true);
             const channel = pc.createDataChannel('fileTransfer', { reliable: true });
             setupDataChannel(channel, targetUserId);
-            
+
+            // Create offer and send to peer
             if (pc.signalingState === 'stable') {
                 const offer = await pc.createOffer();
                 await pc.setLocalDescription(offer);
                 socketService.sendOffer(targetUserId, offer);
             }
+            // Send file metadata after setting up the channel
             socketService.sendFileMetadata(targetUserId, file.name, file.size, file.type);
         }
-        // toast.success(`File offer sent to ${targetUserIds.length} user(s).`);
-        toast.success(`File offer sent to user${targetUserIds.length > 1 ? 's' : ''}.`);
-
-    }, [createPeerConnection, setupDataChannel, users]);
+    }
+    toast.success(`File offer sent to user${targetUserIds.length > 1 ? 's' : ''}.`);
+        }, [createPeerConnection, setupDataChannel, users]);
 
     return (
         <div className="room">
-            {/* ... JSX remains the same as previous version ... */}
             <div className="room-header">
                 <div className="room-info">
                     <h2>Room: {roomId}</h2>
