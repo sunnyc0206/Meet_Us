@@ -1,7 +1,7 @@
 /* ====================
  * Global & Base Styles
  * ==================== */
- * {
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -9,28 +9,27 @@
 
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   min-height: 100vh;
   color: #333;
+  background: black;
+  overflow: hidden;
 }
 
 .App {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  background: transparent;
 }
 
-/* ====================
- * Main App Layout
- * ==================== */
 .App-header {
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
+  margin-top: 1rem;
+  font-family: 'Inter';
+  background: rgb(255 255 255 / 0%);
   padding: 1rem 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .logo {
@@ -41,12 +40,11 @@ body {
 
 .logo i {
   font-size: 2rem;
-  color: #667eea;
 }
 
 .logo h1 {
   font-size: 1.5rem;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #667eea 0%, #eb2f42 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -60,6 +58,8 @@ body {
   padding: 2rem;
 }
 
+/* --- */
+
 /* ====================
  * Connection Status
  * ==================== */
@@ -68,7 +68,7 @@ body {
   align-items: center;
   gap: 0.5rem;
   padding: 0.5rem 1rem;
-  background: rgba(0, 0, 0, 0.05);
+  background: whitesmoke;
   border-radius: 20px;
 }
 
@@ -104,6 +104,8 @@ body {
   align-items: center;
   gap: 0.5rem;
 }
+
+/* --- */
 
 /* ====================
  * Login Form
@@ -160,38 +162,33 @@ body {
   flex: 1;
 }
 
+/* --- */
 
 /* ====================
  * File Action Buttons (Accept/Reject)
  * ==================== */
-
-/* Container for the buttons */
 .file-actions {
   display: flex;
   gap: 10px;
   margin-top: 10px;
 }
 
-/* Base style for all file action buttons */
 .file-actions button {
   display: flex;
   align-items: center;
   justify-content: center;
   width: 40px;
   height: 40px;
-  /* border-radius: 50%; */
   cursor: pointer;
   transition: all 0.3s ease;
   border: none;
 }
 
-/* Style for the Font Awesome icons inside the buttons */
 .file-actions button svg {
   font-size: 1.2em;
   color: white;
 }
 
-/* Style for the Accept button */
 .file-actions .btn-success {
   background-color: #28a745;
 }
@@ -201,7 +198,6 @@ body {
   box-shadow: 0 4px 8px rgba(40, 167, 69, 0.2);
 }
 
-/* Style for the Reject button */
 .file-actions .btn-danger {
   background-color: #dc3545;
 }
@@ -210,6 +206,9 @@ body {
   background-color: #c82333;
   box-shadow: 0 4px 8px rgba(220, 53, 69, 0.2);
 }
+
+/* --- */
+
 /* ====================
  * Buttons
  * ==================== */
@@ -231,7 +230,7 @@ body {
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: black;
   color: white;
   width: 100%;
   justify-content: center;
@@ -270,6 +269,8 @@ body {
   font-size: 0.875rem;
 }
 
+/* --- */
+
 /* ====================
  * Chat Room Layout
  * ==================== */
@@ -296,6 +297,7 @@ body {
   flex: 1;
   display: flex;
   overflow: hidden;
+  border-radius: 16px;
 }
 
 .room-info {
@@ -375,6 +377,8 @@ body {
   background: white;
 }
 
+/* --- */
+
 /* ====================
  * User Panel
  * ==================== */
@@ -427,11 +431,11 @@ body {
   margin-top: 8px;
 }
 
+/* --- */
+
 /* ====================
  * File Message Styling
  * ==================== */
-
-/* Ensures file messages have a clean layout */
 .file-message .message-bubble {
   display: flex;
   flex-direction: column;
@@ -439,37 +443,36 @@ body {
   padding: 12px 16px; 
 }
 
-/* This targets the 'file-info' div that wraps the icon and file name */
 .file-message .file-info {
   display: flex;
   align-items: center;
-  gap: 12px; /* Space between the file icon and the text */
-  /* Remove any box-like properties to make it seamless */
+  gap: 12px;
   background: none;
   padding: 0;
 }
 
 .file-message .file-info .file-icon {
-  font-size: 1.5rem; /* Larger icon for visibility */
-  color: #667eea; /* A nice accent color for the icon */
-  flex-shrink: 0; /* Prevents the icon from shrinking */
+  font-size: 1.5rem;
+  color: #667eea;
+  flex-shrink: 0;
 }
 
 .file-message .file-info span {
   font-weight: 500;
-  color: #212121; /* Darker color for the file name */
-  word-break: break-all; /* Ensures long file names wrap correctly */
+  color: #212121;
+  word-break: break-all;
 }
 
 .file-message .file-size {
   font-size: 0.85em;
   color: #777;
-  margin-top: 5px; /* Add some space below the file name/progress bar */
+  margin-top: 5px;
 }
+
+/* --- */
 
 /* ====================
 * File Actions & Status Icons
-* (These are from previous fixes, included here for context)
 * ==================== */
 .file-actions {
   display: flex;
@@ -508,10 +511,13 @@ body {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
+
+/* --- */
+
 /* ====================
  * Chat Section
  * ==================== */
- .chat-section {
+.chat-section {
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -529,7 +535,7 @@ body {
 .message {
   display: flex;
   flex-direction: column;
-  max-width: 70%; /* Prevents messages from getting too wide */
+  max-width: 70%;
   word-wrap: break-word;
 }
 
@@ -564,7 +570,6 @@ body {
   margin-top: 4px;
 }
 
-
 /* Message Input Form */
 .message-input {
   display: flex;
@@ -573,7 +578,6 @@ body {
   border-top: 1px solid #e5e7eb;
   gap: 10px;
   align-items: center;
-  
 }
 
 .message-input input[type="text"] {
@@ -597,8 +601,6 @@ body {
   background: #f9fafb;
   transition: all 0.3s;
 }
-
-
 
 .message-input input[type="text"]:focus {
   border-color: #667eea;
@@ -639,163 +641,394 @@ body {
   cursor: not-allowed;
 }
 
+/* --- */
+
 /* ====================
- * Main Call Container
+ * Main Call Container - WebEx Style
  * ==================== */
- .call-container {
+.call-container {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: 100%;
   width: 100%;
-  background-color: #121212; /* Dark background color */
-  color: #ffffff; /* White text color */
+  background-color: #1c1f2e;
+  color: #ffffff;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   overflow: hidden;
   position: relative;
 }
 
+/* Loading State */
 .call-loading {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100%;
-  font-size: 1.5rem;
-  color: #cccccc;
+  background: #1c1f2e;
 }
 
-/* ====================
-* Video Grid & Individual Video Tiles
-* ==================== */
+.loading-spinner {
+  width: 60px;
+  height: 60px;
+  border: 3px solid #3a3d4e;
+  border-top: 3px solid #00cf7f;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 2rem;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.call-loading h2 {
+  font-size: 1.75rem;
+  font-weight: 300;
+  color: #ffffff;
+  margin: 0 0 0.5rem 0;
+}
+
+.call-loading p {
+  font-size: 1rem;
+  color: #a0a3b1;
+  margin: 0;
+}
+
+/* Error State */
+.call-error {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  padding: 2rem;
+  text-align: center;
+  background: #1c1f2e;
+}
+
+.error-icon {
+  font-size: 4rem;
+  margin-bottom: 1.5rem;
+  color: #ff5e5e;
+}
+
+.call-error h3 {
+  margin: 0 0 1rem 0;
+  color: #ffffff;
+  font-size: 1.75rem;
+  font-weight: 400;
+}
+
+.call-error p {
+  margin: 0 0 2rem 0;
+  color: #a0a3b1;
+  font-size: 1rem;
+  max-width: 400px;
+  line-height: 1.5;
+}
+
+.error-actions {
+  display: flex;
+  gap: 1rem;
+}
+
+.retry-btn {
+  background-color: #00cf7f;
+  color: #1c1f2e;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.retry-btn:hover {
+  background-color: #00b86e;
+  transform: translateY(-1px);
+}
+
+/* Audio Permission Warning */
+.audio-blocked-warning {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: #f97316;
+  color: white;
+  z-index: 50;
+  padding: 12px 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.audio-warning-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.audio-warning-content i {
+  font-size: 1.2rem;
+}
+
+.enable-audio-btn {
+  background-color: white;
+  color: #f97316;
+  border: none;
+  padding: 6px 16px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.enable-audio-btn:hover {
+  background-color: #f5f5f5;
+}
+
+/* Video Grid - WebEx Style */
 .videos-grid {
+  flex: 1;
   display: grid;
-  flex-grow: 1;
-  gap: 10px;
-  padding: 10px;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Responsive grid */
-  grid-auto-rows: minmax(150px, 1fr);
+  gap: 2px;
+  padding: 2px;
+  background: #0f1117;
   overflow: hidden;
+  position: relative;
 }
 
+/* Dynamic grid layout */
+.videos-grid:has(.video-item:only-child) {
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+}
+
+.videos-grid:has(.video-item:nth-child(2):last-child) {
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 1fr;
+}
+
+.videos-grid:has(.video-item:nth-child(3)),
+.videos-grid:has(.video-item:nth-child(4)) {
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+}
+
+.videos-grid:has(.video-item:nth-child(5)),
+.videos-grid:has(.video-item:nth-child(6)) {
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+}
+
+.videos-grid:has(.video-item:nth-child(7)):not(:has(.video-item:nth-child(10))) {
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+}
+
+.videos-grid:has(.video-item:nth-child(10)) {
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(auto-fit, minmax(150px, 1fr));
+}
+
+/* Video Item */
 .video-item {
   position: relative;
-  border-radius: 8px;
-  background-color: #212121;
+  background-color: #0f1117;
   overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  min-height: 150px;
+  border-radius: 0;
+  transition: all 0.3s ease;
+}
+
+.video-item:hover {
+  box-shadow: 0 0 0 2px #00cf7f;
+  z-index: 10;
 }
 
 .video-item video {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transform: scaleX(-1); /* Mirror local video for natural feel */
+  background: #0f1117;
 }
 
-/* ====================
-* Overlays and Status Icons
-* ==================== */
+.video-item.local-video video {
+  transform: scaleX(-1);
+}
+
+/* Video Placeholder */
+.video-placeholder {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #1a1d2e 0%, #0f1117 100%);
+  color: #a0a3b1;
+}
+
+.video-placeholder i {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+  color: #4a4d5e;
+}
+
+.video-placeholder span {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #ffffff;
+  margin-bottom: 0.5rem;
+}
+
+.video-placeholder p {
+  font-size: 0.9rem;
+  color: #a0a3b1;
+}
+
+/* Username Overlay */
 .username-overlay {
   position: absolute;
   bottom: 0;
   left: 0;
-  width: 100%;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0));
-  padding: 15px 10px 5px 10px;
+  right: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.7) 50%, transparent 100%);
+  padding: 20px 12px 8px;
+  font-size: 0.95rem;
   font-weight: 500;
-  font-size: 0.9rem;
-  z-index: 10;
+  color: white;
+  pointer-events: none;
 }
 
+/* Status Icons */
 .status-icons {
   position: absolute;
-  top: 10px;
-  right: 10px;
-  z-index: 10;
+  top: 8px;
+  right: 8px;
   display: flex;
-  gap: 8px;
+  gap: 6px;
+  pointer-events: none;
 }
 
 .status-icons i {
-  font-size: 1rem;
-  color: #f0f0f0;
-  background-color: rgba(0, 0, 0, 0.4);
-  border-radius: 50%;
-  padding: 6px;
+  font-size: 0.9rem;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 4px;
+  padding: 6px 8px;
+  backdrop-filter: blur(10px);
 }
 
-.status-icons .fa-microphone-slash,
+.status-icons .fa-microphone-slash {
+  background-color: #dc2626;
+}
+
 .status-icons .fa-video-slash {
-  color: #dc3545; /* Red for muted/camera off */
+  background-color: #6b7280;
 }
 
-/* ====================
-* Call Controls Bar
-* ==================== */
+/* Call Controls - WebEx Style */
 .call-controls {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 15px 0;
-  background-color: #212121;
-  box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.3);
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  z-index: 20;
+  padding: 16px;
+  background: #0f1117;
+  border-top: 1px solid #1a1d2e;
+  gap: 12px;
+  position: relative;
+  z-index: 30;
 }
 
 .control-btn {
-  background-color: #333333;
+  background-color: #2d3142;
   border: none;
   color: white;
   font-size: 1.25rem;
-  width: 55px;
-  height: 55px;
-  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
   cursor: pointer;
-  margin: 0 10px;
   position: relative;
-  transition: background-color 0.2s ease, transform 0.2s ease;
+  transition: all 0.2s ease;
   display: flex;
   justify-content: center;
   align-items: center;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  outline: none;
 }
 
 .control-btn:hover {
-  background-color: #4a4a4a;
-  transform: translateY(-2px);
+  background-color: #3a3d4e;
+  transform: translateY(-1px);
+}
+
+.control-btn:active {
+  transform: translateY(0);
 }
 
 .control-btn.active {
-  background-color: #2c68ff; /* Active state blue */
+  background-color: #00cf7f;
+  color: #0f1117;
 }
 
+.control-btn.muted {
+  background-color: #dc2626;
+}
+
+.control-btn.camera-off {
+  background-color: #6b7280;
+}
+
+.control-btn.end-call {
+  background-color: #dc2626;
+  margin-left: 24px;
+}
+
+.control-btn.end-call:hover {
+  background-color: #b91c1c;
+}
+
+/* Tooltips */
 .control-btn .tooltip {
   visibility: hidden;
-  width: 120px;
-  background-color: #555;
-  color: #fff;
-  text-align: center;
-  border-radius: 6px;
-  padding: 5px 0;
-  position: absolute;
-  z-index: 1;
-  bottom: 125%;
-  left: 50%;
-  margin-left: -60px;
   opacity: 0;
-  transition: opacity 0.3s;
-  font-size: 0.8rem;
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(10px);
+  margin-bottom: 8px;
+  padding: 8px 12px;
+  background-color: #1c1f2e;
+  color: white;
+  font-size: 0.875rem;
+  font-weight: 500;
+  white-space: nowrap;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  pointer-events: none;
+  transition: all 0.2s ease;
 }
 
 .control-btn:hover .tooltip {
   visibility: visible;
   opacity: 1;
+  transform: translateX(-50%) translateY(0);
 }
 
 .control-btn .tooltip::after {
@@ -806,7 +1039,88 @@ body {
   margin-left: -5px;
   border-width: 5px;
   border-style: solid;
-  border-color: #555 transparent transparent transparent;
+  border-color: #1c1f2e transparent transparent transparent;
 }
 
+/* Responsive Design */
+@media (max-width: 768px) {
+  .videos-grid {
+    gap: 1px;
+    padding: 1px;
+  }
 
+  .video-item {
+    min-height: 120px;
+  }
+  
+  .video-placeholder i {
+    font-size: 3rem;
+  }
+  
+  .username-overlay {
+    font-size: 0.85rem;
+    padding: 16px 10px 6px;
+  }
+  
+  .call-controls {
+    padding: 12px;
+    gap: 8px;
+  }
+  
+  .control-btn {
+    width: 42px;
+    height: 42px;
+    font-size: 1.1rem;
+  }
+  
+  .control-btn.end-call {
+    margin-left: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .videos-grid:has(.video-item:nth-child(3)) {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(auto-fit, minmax(120px, 1fr));
+  }
+  
+  .control-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 1rem;
+  }
+  
+  .control-btn.end-call {
+    margin-left: 12px;
+  }
+  
+  .video-placeholder i {
+    font-size: 2.5rem;
+  }
+  
+  .video-placeholder span {
+    font-size: 1rem;
+  }
+}
+
+/* Focus States for Accessibility */
+.control-btn:focus-visible {
+  outline: 2px solid #00cf7f;
+  outline-offset: 2px;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.video-item {
+  animation: fadeIn 0.3s ease-out;
+}

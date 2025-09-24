@@ -4,12 +4,14 @@ import socketService from './services/socketService';
 import LoginForm from './components/LoginForm';
 import Room from './components/Room';
 import './App.css';
+import LightRays from './LightRays';
 
 function App() {
   const [isConnected, setIsConnected] = useState(false);
   const [currentRoom, setCurrentRoom] = useState(null);
   const [currentUsername, setCurrentUsername] = useState(null);
   const [users, setUsers] = useState([]);
+  
   const showToast = useCallback((type, message) => {
     switch (type) {
       case 'success':
@@ -55,38 +57,36 @@ function App() {
     socketService.off('disconnect');
 
     socketService.on('join-success', (data) => {
-      console.log('Join success:', data);
+      console.log('✅ Join success:', data);
       setCurrentRoom(data.roomId);
       setCurrentUsername(data.username);
-      // We no longer set an error state
-      // setError(null);
       toast.success(`Joined room: ${data.roomId}`);
     });
 
     socketService.on('join-error', (message) => {
-      console.error('Join error:', message);
+      console.error('❌ Join error:', message);
       toast.error(message);
     });
 
     socketService.on('existing-users', (existingUsers) => {
-      console.log('Existing users:', existingUsers);
+      console.log('👥 Existing users:', existingUsers);
       setUsers(existingUsers);
     });
 
     socketService.on('user-joined', (user) => {
-      console.log('User joined:', user);
+      console.log('👋 User joined:', user);
       setUsers(prev => [...prev, user]);
       showToast('user-joined', `${user.username} joined the room`);
     });
 
     socketService.on('user-left', (data) => {
-      console.log('User left:', data);
+      console.log('🚶‍♂️ User left:', data);
       setUsers(prev => prev.filter(u => u.id !== data.id));
       showToast('user-left', `${data.username} left the room`);
     });
 
     socketService.on('room-deleted', () => {
-      console.log('Room deleted');
+      console.log('🗑️ Room deleted');
       showToast('info', 'The room has been deleted by the creator.');
       handleLeaveRoom();
     });
@@ -99,22 +99,20 @@ function App() {
         setupSocketListeners();
         toast.success('Successfully connected to the server!');
       })
-      .catch((err) => {     
+      .catch((err) => {
         toast.error('Failed to connect to server. Please refresh the page.');
-        setIsConnected(false); // Make sure this is set on failure
+        setIsConnected(false);
         console.error('Connection failed:', err);
       });
 
     return () => {
       socketService.disconnect();
     };
-  }, [setupSocketListeners, showToast]);
+  }, [setupSocketListeners]);
 
   const handleJoinRoom = (roomId, username, password) => {
     if (!isConnected) {
-      showToast('error', 'Server is busy , Please wait and retry in a while', {
-        position: 'top-center'
-      });
+      showToast('error', 'Server is busy, Please wait and retry in a while');
       return;
     }
     socketService.joinRoom(roomId, username, password);
@@ -133,11 +131,25 @@ function App() {
           },
         }}
       />
+      <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100vh', zIndex: -1 }}>
+        <LightRays
+          raysOrigin="top-center"
+          raysColor="#00ffff"
+          raysSpeed={1.5}
+          lightSpread={0.8}
+          rayLength={1.2}
+          followMouse={true}
+          mouseInfluence={0.1}
+          noiseAmount={0.1}
+          distortion={0.05}
+          className="custom-rays"
+        />
+      </div>
       
       <header className="App-header">
         <div className="logo">
           <i className="fas fa-share-nodes"></i>
-          <h1>MeetUs - P2P </h1>
+          <h1>MeetUs - P2P</h1>
         </div>
         <div className="connection-status">
           <span className={`status-dot ${isConnected ? 'connected' : 'disconnected'}`}></span>
@@ -145,7 +157,6 @@ function App() {
         </div>
       </header>
       <main className="App-main">
-
         {!currentRoom ? (
           <LoginForm onJoinRoom={handleJoinRoom} />
         ) : (
