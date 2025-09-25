@@ -996,12 +996,12 @@ body {
 }
 
 .control-btn.end-call {
-  background-color: #dc2626;
-  margin-left: 24px;
+  background: #dc3545;
+  padding: 0 24px;
 }
 
 .control-btn.end-call:hover {
-  background-color: #b91c1c;
+  background: #c82333;
 }
 
 /* Tooltips */
@@ -1123,4 +1123,177 @@ body {
 
 .video-item {
   animation: fadeIn 0.3s ease-out;
+}
+
+/* Animations for join call screen */
+@keyframes blob {
+  0% {
+    transform: translate(0px, 0px) scale(1);
+  }
+  33% {
+    transform: translate(30px, -50px) scale(1.1);
+  }
+  66% {
+    transform: translate(-20px, 20px) scale(0.9);
+  }
+  100% {
+    transform: translate(0px, 0px) scale(1);
+  }
+}
+
+.animate-blob {
+  animation: blob 7s infinite;
+}
+
+.animation-delay-2000 {
+  animation-delay: 2s;
+}
+
+.animation-delay-4000 {
+  animation-delay: 4s;
+}
+
+/* Ensure call container takes full height */
+.call-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  background: #575757;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Join Call Screen Styles */
+.join-call-gradient {
+  background: linear-gradient(to bottom right, #111827, #1f2937, #111827);
+}
+
+.join-call-button {
+  background: linear-gradient(to right, #10b981, #059669);
+  padding: 20px 40px;
+  font-size: 18px;
+  font-weight: 600;
+  color: white;
+  border-radius: 12px;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  transform: scale(1);
+  transition: all 0.2s;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.join-call-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 25px 30px -5px rgba(16, 185, 129, 0.25);
+}
+
+.join-call-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.5);
+}
+
+.join-call-icon {
+  width: 96px;
+  height: 96px;
+  background: #1f2937;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  margin-bottom: 24px;
+}
+
+.join-call-icon i {
+  font-size: 40px;
+  color: #10b981;
+}
+
+/* Join Call Modal Styles */
+.join-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+  animation: fadeIn 0.2s ease-out;
+}
+
+.join-modal {
+  background-color: #1f2937;
+  border-radius: 0.5rem;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  padding: 2rem;
+  max-width: 28rem;
+  width: 100%;
+  margin: 0 1rem;
+  animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.join-modal-icon {
+  width: 4rem;
+  height: 4rem;
+  background-color: #374151;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1rem;
+}
+
+.join-modal-icon i {
+  font-size: 1.5rem;
+  color: #10b981;
+}
+
+.join-modal-button {
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  transition: all 0.2s;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.join-modal-button-primary {
+  background-color: #059669;
+  color: white;
+}
+
+.join-modal-button-primary:hover {
+  background-color: #047857;
+}
+
+.join-modal-button-secondary {
+  background-color: #4b5563;
+  color: white;
+}
+
+.join-modal-button-secondary:hover {
+  background-color: #374151;
 }

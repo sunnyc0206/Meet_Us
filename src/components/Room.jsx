@@ -576,6 +576,7 @@ const Room = ({ roomId, username, users, onLeaveRoom, showToast }) => {
                 showToast={showToast}
                 isActive={activeTab === "meet"}
                 onNavigateToCall={onNavigateToCall}
+                onNavigateToChat={onNavigateToChat}
               />
             )}
           </div>
